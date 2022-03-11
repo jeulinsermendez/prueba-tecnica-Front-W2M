@@ -1,0 +1,44 @@
+<app-spinner></app-spinner>
+<mat-toolbar color="black" class="example-toolbar">
+  <button mat-icon-button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <h1 class="app-name">Heroes App</h1>
+</mat-toolbar>
+
+<mat-drawer-container class="app-container" autosize>
+  <mat-drawer #drawer [opened]="false" class="app-sidenav" mode="side">
+    <div class="row">
+      <div class="col"><h1>Heroes App</h1></div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col">
+        <button mat-icon-button (click)="goToHome()">
+          <mat-icon class="mr-2">home</mat-icon>
+          <mat-hint align="start">Home</mat-hint>
+        </button>
+      </div>
+    </div>
+    <div class="row mt-2 mb-14">
+      <div class="col">
+        <button mat-icon-button (click)="goToAbout()">
+          <mat-icon class="mr-2">help</mat-icon>
+          <mat-hint align="start">About </mat-hint>
+        </button>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col">
+        <button mat-icon-button (click)="logout()">
+          <mat-icon class="mr-2">input</mat-icon>
+          <mat-hint align="end">Logout </mat-hint>
+        </button>
+      </div>
+    </div>
+  </mat-drawer>
+
+  <router-outlet></router-outlet>
+</mat-drawer-container>
+
+
