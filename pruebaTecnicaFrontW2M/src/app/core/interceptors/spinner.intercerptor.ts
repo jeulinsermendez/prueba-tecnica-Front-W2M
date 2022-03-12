@@ -4,7 +4,6 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpErrorResponse,
 } from '@angular/common/http';
 import { finalize, Observable} from 'rxjs';
 import { SpinnerService } from 'src/app/shared/components/spinner/service/spinner.service';

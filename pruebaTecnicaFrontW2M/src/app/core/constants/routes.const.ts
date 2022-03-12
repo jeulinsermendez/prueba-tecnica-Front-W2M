@@ -11,4 +11,12 @@ export const ROUTES_CONSTANTS = {
     route: '/about',
     path: 'about'
   } ,
+  HERO: {
+    route: '/hero',
+    path: 'hero/:id'
+  } ,
+  LIST: {
+    route: '/list',
+    path: 'list'
+  } ,
 }

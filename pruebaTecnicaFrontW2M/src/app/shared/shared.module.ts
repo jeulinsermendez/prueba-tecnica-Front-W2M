@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material/material-assets.module';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { ImageNotFoundDirective } from './directives/image-not-found.directive';
 
 
 
@@ -11,10 +12,11 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     MaterialModule
 
   ],
-  declarations: [SpinnerComponent],
+  declarations: [SpinnerComponent, ImageNotFoundDirective],
   exports:[
     MaterialModule,
-    SpinnerComponent
+    SpinnerComponent,
+    ImageNotFoundDirective
   ]
 })
 export class SharedModule { }

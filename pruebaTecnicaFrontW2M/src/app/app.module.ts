@@ -14,7 +14,8 @@ import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -23,7 +24,7 @@ import { LayoutModule } from './layout/layout.module';
     HttpClientModule,
     SharedModule,
     CoreModule,
-    LayoutModule
+    LayoutModule,
   ],
   providers: [
     CookieService,

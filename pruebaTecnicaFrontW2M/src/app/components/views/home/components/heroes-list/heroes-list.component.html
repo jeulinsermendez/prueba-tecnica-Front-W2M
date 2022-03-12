@@ -1,0 +1,91 @@
+<mat-grid-list
+  cols="1"
+  *ngIf="!(homeService.heroes$ | async); else divHeroList"
+>
+  <mat-grid-tile>
+    <mat-spinner></mat-spinner>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<div *ngIf="(homeService.heroes$ | async)?.length === 0">
+  <h1>No se ha encontrado nada con este argumento.</h1>
+</div>
+
+<ng-template #divHeroList>
+  <div>
+    <h1>Lista de Héroes</h1>
+    <br />
+
+    <div>
+      <h3>Buscar heroe:</h3>
+      <mat-form-field class="example-full-width">
+        <mat-label>Héroe a buscar</mat-label>
+        <input
+          type="text"
+          aria-label="Number"
+          matInput
+          [(ngModel)]="searchTerm"
+          [matAutocomplete]="auto"
+          (input)="search()"
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #auto="matAutocomplete"
+          (optionSelected)="optionSelected($event)"
+        >
+          <mat-option
+            *ngFor="let hero of homeService.heroesSearching$ | async"
+            [value]="hero"
+          >
+            {{ hero?.superhero }}
+          </mat-option>
+          <mat-option
+            value=""
+            *ngIf="
+              (homeService.heroesSearching$ | async)?.length == 0 &&
+              searchTerm.trim().length > 0
+            "
+          >
+            No data
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button
+        mat-button
+        color="info"
+        (click)="add()"
+        [disabled]="user != 'Admin'"
+      >
+        Añadir
+      </button>
+      <span *ngIf="user != 'Admin'" class="warning"
+        >* Para añadir tiene que ser 'Admin'</span
+      >
+    </div>
+
+    <mat-divider></mat-divider>
+    <br />
+
+    <div
+      fxLayout="row wrap"
+      fxLayoutAlign="center"
+      fxLayoutGap="20px"
+      fxLayout.xs="column"
+    >
+      <div
+        fxFlex="20"
+        fxFlex.lg="15"
+        fxFlex.sm="30"
+        *ngFor="let hero of homeService.heroes$ | async"
+      >
+        <app-HeroTargetComponent
+          [hero]="hero"
+          (heroToEdit)="edit($event)"
+          (heroToDeletet)="deleteHero($event)"
+          [isAdmin]="true"
+        >
+        </app-HeroTargetComponent>
+      </div>
+    </div>
+  </div>
+</ng-template>

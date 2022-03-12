@@ -21,8 +21,10 @@ export class LayoutBasicComponent implements OnInit {
     this.authenticationService.logout();
     this.router.navigate([ROUTES_CONSTANTS.LOGIN.route]);
   }
+
   goToAbout(){
-    this.router.navigate([ROUTES_CONSTANTS.ABOUT.route]);
+    this.
+    router.navigate([ROUTES_CONSTANTS.ABOUT.route]);
   }
   goToHome(){
     this.router.navigate([ROUTES_CONSTANTS.HOME.route]);

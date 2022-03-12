@@ -1,0 +1,39 @@
+<mat-grid-list cols="1" *ngIf="!homeService.hero.getValue(); else heroDiv">
+  <mat-grid-tile>
+    <mat-spinner></mat-spinner>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<ng-template #heroDiv>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="30px">
+    <div fxFlex="50">
+      <h1>
+        {{ (homeService.hero$ | async)?.superhero }}<small> - </small
+        >{{ (homeService.hero$ | async)?.alter_ego }}
+      </h1>
+      <mat-divider></mat-divider>
+      <br />
+
+      <img appImageNotFound [src]="(homeService.hero$ | async)?.image" />
+    </div>
+
+    <div fxFlex="50">
+      <h1>{{ (homeService.hero$ | async)?.publisher }}</h1>
+      <mat-divider></mat-divider>
+      <mat-list>
+        <mat-list-item
+          ><strong>Primera aparición:</strong>
+          {{ (homeService.hero$ | async)?.first_appearance }}</mat-list-item
+        >
+        <mat-list-item
+          ><strong>Personajes:</strong
+          >{{ (homeService.hero$ | async)?.characters }}</mat-list-item
+        >
+      </mat-list>
+
+      <br />
+
+      <button mat-button color="warn" (click)="comeBack()">Volver</button>
+    </div>
+  </div>
+</ng-template>
