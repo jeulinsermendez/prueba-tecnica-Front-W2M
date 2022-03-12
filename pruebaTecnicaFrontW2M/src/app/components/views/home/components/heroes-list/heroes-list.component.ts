@@ -42,7 +42,6 @@ export class HeroesListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.homeService.updateHero(result);
-        this.homeService.getHeroes();
       }
     });
   }
