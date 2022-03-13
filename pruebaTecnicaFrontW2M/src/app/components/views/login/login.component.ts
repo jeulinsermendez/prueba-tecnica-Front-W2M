@@ -12,17 +12,17 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public authenticationService: AuthenticationService,private router: Router) { }
   user: User = {
 
   };
+  constructor(public authenticationService: AuthenticationService,private router: Router) { }
 
   ngOnInit() {
   }
 
   login(){
     this.authenticationService.login(this.user).subscribe(response => {
-     // if(!response) return;
+
       this.router.navigate([ROUTES_CONSTANTS.HOME.route]);
     });
   }

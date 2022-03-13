@@ -1,10 +1,6 @@
-<mat-grid-list cols="1" *ngIf="!homeService.hero.getValue(); else heroDiv">
-  <mat-grid-tile>
-    <mat-spinner></mat-spinner>
-  </mat-grid-tile>
-</mat-grid-list>
 
-<ng-template #heroDiv>
+
+<ng-container >
   <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="30px">
     <div fxFlex="50">
       <h1>
@@ -36,4 +32,4 @@
       <button mat-button color="warn" (click)="comeBack()">Volver</button>
     </div>
   </div>
-</ng-template>
+</ng-container>

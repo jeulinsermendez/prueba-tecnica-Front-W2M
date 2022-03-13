@@ -1,52 +1,31 @@
-<h1 *ngIf="!hero">{{ data === null ? "Nuevo héroe" : "Editar héroe" }}</h1>
+<h1>Editar héroe</h1>
+
+<ng-content select="[tittle]"></ng-content>
 
 <div fxLayout="row" fxLayoutGap="40px" fxLayout.xs="column">
   <form [formGroup]="form" (ngSubmit)="save(form.value)">
     <div fxFlex="50">
       <mat-form-field>
         <mat-label>Superhéroe</mat-label>
-        <input
-          matInput
-          type="text"
-          formControlName="superhero"
-        />
-        <mat-error *ngIf="heroToFormsForm.superhero == ''">
-          El nombre es obligatorio
-        </mat-error>
+        <input matInput type="text" formControlName="superhero" />
+
       </mat-form-field>
       <mat-form-field>
         <mat-label>Alter ego</mat-label>
-        <input
-          matInput
-          type="text"
-          formControlName="alter_ego"
+        <input matInput type="text" formControlName="alter_ego" />
 
-        />
-        <mat-error *ngIf="heroToFormsForm.alter_ego == ''">
-          El alter ego es obligatorio
-        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Primera aparición</mat-label>
-        <input
-          matInput
-          type="text"
-          formControlName="first_appearance"
-        />
-        <mat-error *ngIf="heroToFormsForm.alter_ego == ''">
-          La primera aarición es obligatoria
-        </mat-error>
+        <input matInput type="text" formControlName="first_appearance" />
+
       </mat-form-field>
 
       <div fxLayout="row" fxLayout.xs="column">
         <mat-form-field>
           <mat-label>Personaje</mat-label>
-          <input
-            matInput
-            type="text"
-            formControlName="characters"
-          />
+          <input matInput type="text" formControlName="characters" />
         </mat-form-field>
       </div>
 
@@ -70,7 +49,6 @@
           color="primary"
           type="submit"
           [disabled]="form.invalid"
-
         >
           <mat-icon>edit</mat-icon>
           {{ data === null ? "Crear" : "Editar" }}
@@ -88,14 +66,16 @@
           (change)="processFile(imageInput)"
         />
       </label>
-      <div *ngIf="heroToFormsForm.image != ''" fxLayoutGap="30px">
+
+      <ng-container>
         <img
-          onerror="this.onerror=null;this.src='assets/no-image.png'"
-          [src]="heroToFormsForm"
-          alt=""
-          width="200px"
-        />
-      </div>
+        appImageNotFound
+        mat-card-image
+        [src]="data.image"
+        height="200"
+        width="200"
+      />
+      </ng-container>
     </div>
   </form>
 </div>

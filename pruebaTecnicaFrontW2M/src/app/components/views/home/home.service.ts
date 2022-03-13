@@ -28,7 +28,9 @@ export class HomeService {
   heroesSearching: BehaviorSubject<Hero[]> = new BehaviorSubject<Hero[]>([]);
   heroesSearching$ = this.heroesSearching.asObservable();
 
-  constructor(public heroesDataService: HeroesDataService) {}
+  constructor(public heroesDataService: HeroesDataService) {
+
+  }
 
   destroy() {
     this.destroy$.next();

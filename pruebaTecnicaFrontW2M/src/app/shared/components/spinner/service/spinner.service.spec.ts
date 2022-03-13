@@ -13,4 +13,13 @@ describe('Service: Spinner', () => {
   it('should ...', inject([SpinnerService], (service: SpinnerService) => {
     expect(service).toBeTruthy();
   }));
+
+  it('should show', inject([SpinnerService], (service: SpinnerService) => {
+    service.show();
+    expect(service).toBeTruthy();
+  }));
+  it('should hide', inject([SpinnerService], (service: SpinnerService) => {
+    service.hide();
+    expect(service).toBeTruthy();
+  }));
 });

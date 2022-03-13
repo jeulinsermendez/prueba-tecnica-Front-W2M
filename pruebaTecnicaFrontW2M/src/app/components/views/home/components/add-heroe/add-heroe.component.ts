@@ -1,7 +1,6 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -13,10 +12,12 @@ import { HomeService } from '../../home.service';
   selector: 'app-add-heroe',
   templateUrl: './add-heroe.component.html',
   styleUrls: ['./add-heroe.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AddHeroeComponent implements OnInit {
-  hero!: Hero;
+export class AddHeroeComponent implements AfterContentInit {
+
   form: FormGroup;
+
   publisher = [
     {
       id: 'DC Comics',
@@ -36,43 +37,54 @@ export class AddHeroeComponent implements OnInit {
     publisher: Publisher.MarvelComics,
     image: '',
   };
+
   constructor(
     private fb: FormBuilder,
     public homeService: HomeService,
     public dialogRef: MatDialogRef<AddHeroeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Hero
+    @Inject(MAT_DIALOG_DATA) public data: Hero = {}
   ) {
-    this.form = fb.group({
-      alter_ego: [this.data.alter_ego, Validators.required],
-      superhero: [this.data.superhero, Validators.required],
-      characters: [this.data.characters],
-      first_appearance: [this.data.first_appearance, Validators.required],
-      publisher: [this.data.publisher],
-      image: [this.data.image],
-    });
-  }
 
-  ngOnInit(): void {
+    this.form = fb.group({
+      alter_ego: [this.data.alter_ego || '', Validators.required],
+      superhero: [this.data.superhero || '', Validators.required],
+      characters: [this.data.characters || ''],
+      first_appearance: [this.data.first_appearance || '', Validators.required],
+      publisher: [this.data.publisher || ''],
+      image: [this.data.image || ''],
+    });
+    this.heroToFormsForm.image = this.data.image;
+
+  }
+  ngAfterContentInit(): void {
+
     if (this.data) {
+
       this.homeService
         .getHeroeById(this.data.id as string)
         .subscribe((hero) => {
           this.heroToFormsForm = hero;
         });
     }
+
   }
 
-  save(value: Hero): void {
-    value.id = this.data.id;
 
+  save(value: Hero): void {
+
+    value.id = this.data.id;
+    value.image = this.heroToFormsForm.image;
     this.dialogRef.close(value);
   }
 
   processFile(file: any): void {
+
     const reader = new FileReader();
+
     reader.readAsDataURL(file.files[0]);
     reader.onloadend = () => {
       this.heroToFormsForm.image = reader.result as string;
     };
+
   }
 }

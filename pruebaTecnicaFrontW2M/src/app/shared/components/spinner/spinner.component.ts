@@ -4,9 +4,18 @@ import { SpinnerService } from './service/spinner.service';
 @Component({
   selector: 'app-spinner',
   template:`
-    <div class="overlay" *ngIf="isLoadins$ | async">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </div>
+  <div class="center" *ngIf="isLoadins$ | async">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
   `,
   styleUrls: ['./spinner.component.scss']
 })

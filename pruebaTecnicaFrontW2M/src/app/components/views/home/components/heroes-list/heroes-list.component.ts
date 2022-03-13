@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -15,13 +15,17 @@ import { DialogConfirmComponent } from 'src/app/shared/components/dialog-confirm
   selector: 'app-heroes-list',
   templateUrl: './heroes-list.component.html',
   styleUrls: ['./heroes-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroesListComponent implements OnInit {
+
   searchTerm: string = '';
   currentPage: number = 1;
   heros: Hero[] = [];
 
-  user: User = {};
+  showEditHero: boolean = false;
+  showAddHero: boolean = false;
+
 
   constructor(
     public homeService: HomeService,
@@ -30,49 +34,42 @@ export class HeroesListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user = JSON.parse(
-      this.cookieService.get(COOKIES_GETTER_SETTER.USER_LOGGED)
-    );
+
+
   }
 
   edit(hero: Hero) {
+
+    this.showEditHero = true;
+
     const dialogRef = this.matDialog.open(AddHeroeComponent, {
       data: hero,
     });
+
     dialogRef.afterClosed().subscribe((result) => {
+
       if (result) {
         this.homeService.updateHero(result);
-      }
-    });
-  }
-  deleteHero(hero: Hero) {
-    const dialogRef = this.matDialog.open(DialogConfirmComponent);
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === true) {
-        this.homeService.deleteHero(hero.id || '');
+        this.showEditHero = false;
       }
     });
   }
 
-  add() {
-    const dialogRef = this.matDialog.open(AddHeroeComponent);
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.homeService.addHero(result);
-      }
-    });
-  }
 
   search() {
+
     this.homeService.getSerchingHeros(this.searchTerm.trim());
   }
 
-  optionSelected(event: MatAutocompleteSelectedEvent) {
+  optionSelected(event: any) {
+
     if (!event.option.value) {
       return;
     }
+
     const hero: Hero = event.option.value;
     this.searchTerm = hero.superhero || '';
     this.homeService.searchHero(hero);
+
   }
 }

@@ -5,15 +5,17 @@ import { DebugElement } from '@angular/core';
 
 import { DialogConfirmComponent } from './dialog-confirm.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { of } from 'rxjs';
 
 describe('DialogConfirmComponent', () => {
   let component: DialogConfirmComponent;
   let fixture: ComponentFixture<DialogConfirmComponent>;
 
   const dialogMock = {
-    close: () => { }
+    close: () => null
+
   };
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [ DialogConfirmComponent ],
       imports:[MatDialogModule],
@@ -30,5 +32,18 @@ describe('DialogConfirmComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should confirm', () => {
+    const  dialogRef = TestBed.inject(MatDialogRef);
+    const spy = spyOn(dialogRef, 'close');
+    component.confirm();
+    expect(spy).toBeTruthy();
+  });
+  it('should cancel', () => {
+    const  dialogRef = TestBed.inject(MatDialogRef);
+    const spy = spyOn(dialogRef, 'close');
+    component.cancel();
+    expect(spy).toBeTruthy();
   });
 });

@@ -3,19 +3,18 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import {  map, Observable, of } from 'rxjs';
 import { User } from 'src/app/core/models/user.model';
-import { WebRequest } from 'src/app/core/models/web-request';
 import { environment } from 'src/environments/environment';
 import { COOKIES_GETTER_SETTER } from './authentication.const';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticationService extends WebRequest {
+export class AuthenticationService {
   constructor(
     public httpClient: HttpClient,
     private cookieService: CookieService
   ) {
-    super();
+
   }
 
   login(user: User): Observable<any> {

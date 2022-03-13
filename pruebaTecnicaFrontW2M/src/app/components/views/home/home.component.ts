@@ -1,10 +1,5 @@
 import { AfterViewInit, OnDestroy } from '@angular/core';
-import { Component, OnInit, enableProdMode } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { ROUTES_CONSTANTS } from 'src/app/core/constants/routes.const';
-import { Hero } from 'src/app/core/models/hero.interface';
-import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
 
 @Component({
@@ -18,8 +13,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     public homeService: HomeService,
-    public matDialog: MatDialog,
-    private router: Router
   ) {}
 
   ngOnInit() {

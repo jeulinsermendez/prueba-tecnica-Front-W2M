@@ -8,10 +8,12 @@ import { HomeService } from './home.service';
 import { HeroesDataService } from 'src/app/services/heroes/heroes-data.service';
 import { HeroesListComponent } from './components/heroes-list/heroes-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AddHeroeComponent } from './components/add-heroe/add-heroe.component';
+
 import { HeroeComponent } from './components/heroe/heroe.component';
 import { HeroTargetComponentComponent } from './components/HeroTargetComponent/HeroTargetComponent.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AddHeroeComponent } from './components/add-heroe/add-heroe.component';
+
 
 @NgModule({
   imports: [
@@ -19,16 +21,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     SharedModule,
     HomeRoutingModule,
     CoreModule,
-    FormsModule,
-    ReactiveFormsModule,
     FlexLayoutModule,
   ],
   declarations: [
     HomeComponent,
     HeroesListComponent,
-    AddHeroeComponent,
     HeroeComponent,
     HeroTargetComponentComponent,
+    AddHeroeComponent
   ],
   exports: [HomeComponent],
   providers: [HomeService, HeroesDataService],

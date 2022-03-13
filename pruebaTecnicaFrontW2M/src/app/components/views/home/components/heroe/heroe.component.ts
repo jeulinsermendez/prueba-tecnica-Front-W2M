@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   ActivatedRoute,
-  ActivatedRouteSnapshot,
-  NavigationEnd,
   Router,
-  RouterStateSnapshot,
 } from '@angular/router';
 import { Subject } from 'rxjs';
 import { switchMap, filter, takeUntil } from 'rxjs/operators';
@@ -15,9 +12,12 @@ import { HomeService } from '../../home.service';
   selector: 'app-heroe',
   templateUrl: './heroe.component.html',
   styleUrls: ['./heroe.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroeComponent implements OnInit {
+
   private destroy$: Subject<void> = new Subject();
+
   constructor(
     private activatedRoute: ActivatedRoute,
     public homeService: HomeService,
@@ -31,16 +31,21 @@ export class HeroeComponent implements OnInit {
         this.homeService.knowMore(id);
       });
   }
+
   ngOnDestroy(): void {
+
     this.homeService.destroy();
     this.destroy$.next();
     this.destroy$.complete();
   }
 
   comeBack() {
+
     this.homeService.getHeroes();
+
     this.router.navigate([
       `${ROUTES_CONSTANTS.HOME.route}${ROUTES_CONSTANTS.LIST.route}`,
     ]);
+
   }
 }

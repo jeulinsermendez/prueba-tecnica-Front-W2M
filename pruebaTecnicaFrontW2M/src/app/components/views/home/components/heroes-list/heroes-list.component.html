@@ -1,17 +1,10 @@
-<mat-grid-list
-  cols="1"
-  *ngIf="!(homeService.heroes$ | async); else divHeroList"
->
-  <mat-grid-tile>
-    <mat-spinner></mat-spinner>
-  </mat-grid-tile>
-</mat-grid-list>
+
 
 <div *ngIf="(homeService.heroes$ | async)?.length === 0">
   <h1>No se ha encontrado nada con este argumento.</h1>
 </div>
 
-<ng-template #divHeroList>
+<ng-container>
   <div>
     <h1>Lista de Héroes</h1>
     <br />
@@ -50,17 +43,7 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
-      <button
-        mat-button
-        color="info"
-        (click)="add()"
-        [disabled]="user != 'Admin'"
-      >
-        Añadir
-      </button>
-      <span *ngIf="user != 'Admin'" class="warning"
-        >* Para añadir tiene que ser 'Admin'</span
-      >
+
     </div>
 
     <mat-divider></mat-divider>
@@ -81,11 +64,13 @@
         <app-HeroTargetComponent
           [hero]="hero"
           (heroToEdit)="edit($event)"
-          (heroToDeletet)="deleteHero($event)"
           [isAdmin]="true"
         >
         </app-HeroTargetComponent>
       </div>
     </div>
   </div>
-</ng-template>
+</ng-container>
+
+
+
