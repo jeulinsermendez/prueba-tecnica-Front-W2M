@@ -74,6 +74,16 @@ describe('HeroesListComponent', () => {
     component.search();
     expect(spy).toHaveBeenCalled();
   });
+  it('should optionSelected', () => {
+    const event = {
+        option : {
+          value: {...heroMock}
+        }
+    };
+    const spy = spyOn(homeService, 'searchHero').withArgs(heroMock).and.callThrough();
+    component.optionSelected(event);
+    expect(spy).toHaveBeenCalled();
+  });
 
 
 

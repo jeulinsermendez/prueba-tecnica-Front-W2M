@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+
+  json-server:
+    image: clue/json-server
+    restart: always
+    volumes:
+    - ./db.json:/db.json
+    ports:
+    - 80:80
+

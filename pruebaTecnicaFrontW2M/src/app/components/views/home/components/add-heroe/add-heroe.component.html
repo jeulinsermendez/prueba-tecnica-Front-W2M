@@ -32,7 +32,7 @@
       <div fxLayout="row" fxLayout.xs="column">
         <mat-form-field>
           <mat-label>Creador</mat-label>
-          <mat-select formControlName="publisher">
+          <mat-select formControlName="publisher" ngDefaultControl>
             <mat-option
               *ngFor="let publish of publisher"
               [value]="publish.id"

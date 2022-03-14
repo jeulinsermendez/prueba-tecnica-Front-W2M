@@ -1,22 +1,28 @@
-import { AfterContentInit, ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, forwardRef, Inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
+  NG_VALUE_ACCESSOR,
   Validators,
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Hero, Publisher } from 'src/app/core/models/hero.interface';
 import { HomeService } from '../../home.service';
 
+const firstNameControl = new FormControl();
+
 @Component({
   selector: 'app-add-heroe',
   templateUrl: './add-heroe.component.html',
   styleUrls: ['./add-heroe.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddHeroeComponent implements AfterContentInit {
 
   form: FormGroup;
+
+
 
   publisher = [
     {
@@ -46,12 +52,14 @@ export class AddHeroeComponent implements AfterContentInit {
   ) {
 
     this.form = fb.group({
+
       alter_ego: [this.data.alter_ego || '', Validators.required],
       superhero: [this.data.superhero || '', Validators.required],
       characters: [this.data.characters || ''],
       first_appearance: [this.data.first_appearance || '', Validators.required],
       publisher: [this.data.publisher || ''],
       image: [this.data.image || ''],
+      id: [this.data.id],
     });
     this.heroToFormsForm.image = this.data.image;
 
@@ -80,7 +88,6 @@ export class AddHeroeComponent implements AfterContentInit {
   processFile(file: any): void {
 
     const reader = new FileReader();
-
     reader.readAsDataURL(file.files[0]);
     reader.onloadend = () => {
       this.heroToFormsForm.image = reader.result as string;
