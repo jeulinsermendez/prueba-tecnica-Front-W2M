@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ROUTES_CONSTANTS } from 'src/app/core/constants/routes.const';
 import { User } from 'src/app/core/models/user.model';
@@ -12,17 +13,21 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 })
 export class LoginComponent implements OnInit {
 
-  user: User = {
+  form: FormGroup;
 
-  };
-  constructor(public authenticationService: AuthenticationService,private router: Router) { }
+  constructor(public authenticationService: AuthenticationService,private router: Router,
+    private fb: FormBuilder) {
+      this.form = fb.group({
+        email: ['', Validators.required],
+        password: [ '', Validators.required],
+      });
+    }
 
   ngOnInit() {
   }
 
-  login(){
-    this.authenticationService.login(this.user).subscribe(response => {
-
+  login(value: User){
+    this.authenticationService.login(value).subscribe(response => {
       this.router.navigate([ROUTES_CONSTANTS.HOME.route]);
     });
   }

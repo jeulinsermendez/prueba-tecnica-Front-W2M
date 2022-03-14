@@ -6,7 +6,7 @@ import { DebugElement } from '@angular/core';
 import { LoginComponent } from './login.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ROUTES_CONSTANTS } from 'src/app/core/constants/routes.const';
 import { HomeComponent } from '../home/home.component';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
@@ -35,6 +35,7 @@ describe('LoginComponent', () => {
           },
         ]),
         FormsModule,
+        ReactiveFormsModule
       ],
     }).compileComponents();
   });
@@ -53,7 +54,7 @@ describe('LoginComponent', () => {
   it('should login', () => {
     const authenticationService = TestBed.inject(AuthenticationService);
     const spy = spyOn(authenticationService, 'login').and.returnValue(of(user));
-    component.login();
+    component.login(user);
       expect(spy)
       .toHaveBeenCalled();
   });

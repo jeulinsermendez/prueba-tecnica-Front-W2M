@@ -22,6 +22,7 @@ import { AddHeroeComponent } from './components/add-heroe/add-heroe.component';
     HomeRoutingModule,
     CoreModule,
     FlexLayoutModule,
+    FormsModule
   ],
   declarations: [
     HomeComponent,

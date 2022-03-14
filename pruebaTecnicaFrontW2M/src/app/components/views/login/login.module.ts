@@ -13,7 +13,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     LoginRoutingModule,
     SharedModule,
-
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     LoginComponent
